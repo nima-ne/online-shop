@@ -29,7 +29,7 @@ export default function InsideProductPage({ product, id }: PItype) {
 
         <p className="mb-5 lg:mb-10 text-justify lg:text-left">{product.description}</p>
 
-        <div className="flex flex-row sm:flex-row justify-start items-center gap-3 mt-auto">
+        <div className="flex flex-col sm:flex-row justify-center items-center gap-7 mt-auto">
           <AddToCartBtn id={id} />
           <RemoveFromCart id={id} />
           <p className="font-semibold">
