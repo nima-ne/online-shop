@@ -11,7 +11,7 @@ interface ProductPageProps {
 
 export default async function ProductPage(props: ProductPageProps) {
   const { id } = await props.params;
-  const product = await axios(`https://fakestoreapi.com/products/${id}`);
+  const product = await axios.get(`https://fakestoreapi.com/products/${id}`);
   const result: ProType = product.data;
 
   return (
