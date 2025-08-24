@@ -1,27 +1,30 @@
 "use client";
-import React, { useContext, useEffect } from "react";
+import React from "react";
 import Button from "./button";
 import { useShoppingCartContext } from "@/context/ShoppingCartContext";
 
-function AddToCartBtn({ id }: { id: string }) {
-  const { cartItems, handleIncrease, qty, handleDecrease } =
-    useShoppingCartContext();
+interface AddToCartBtnProps {
+  id: string;
+}
+
+export default function AddToCartBtn({ id }: AddToCartBtnProps) {
+  const { handleIncrease, qty, handleDecrease } = useShoppingCartContext();
 
   return (
-    <div className="flex  flex-row">
+    <div className="flex flex-row">
       <Button
-        children=" - "
         className="bg-sky-500 text-white w-[27px] font-bold text-center px-2 rounded-lg cursor-pointer"
         onClick={() => handleDecrease(parseInt(id))}
-      />
-      <span className="mx-5"> {qty(parseInt(id))} </span>
+      >
+        -
+      </Button>
+      <span className="mx-5">{qty(parseInt(id))}</span>
       <Button
-        children=" + "
         className="bg-sky-500 text-white w-[27px] font-bold text-center px-2 rounded-lg cursor-pointer"
         onClick={() => handleIncrease(parseInt(id))}
-      />
+      >
+        +
+      </Button>
     </div>
   );
 }
-
-export default AddToCartBtn;

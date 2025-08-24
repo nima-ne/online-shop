@@ -12,7 +12,6 @@ export interface ProType {
   title: string;
 }
 
-
 export default async function Page() {
   const callProducts = await axios.get("https://fakestoreapi.com/products");
   const products = callProducts.data as ProType[];

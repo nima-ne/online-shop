@@ -1,8 +1,7 @@
-// app/about/page.tsx یا pages/about.tsx
 import React from "react";
 import Container from "@/components/container";
 
-function AboutPage() {
+export default function AboutPage() {
   return (
     <Container>
       <div className="max-w-4xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md mt-10">
@@ -30,12 +29,10 @@ function AboutPage() {
         <div className="mt-8">
           <h2 className="text-xl font-semibold mb-3 mt-2">Our Story</h2>
           <p className="text-gray-700">
-            online shop was founded with the vision of bringing a curated selection of quality products directly to your doorstep. From humble beginnings, we have grown into a community-focused online store that values our customers above all.
+            Online shop was founded with the vision of bringing a curated selection of quality products directly to your doorstep. From humble beginnings, we have grown into a community-focused online store that values our customers above all.
           </p>
         </div>
       </div>
     </Container>
   );
 }
-
-export default AboutPage;

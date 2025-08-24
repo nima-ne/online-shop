@@ -5,10 +5,10 @@ import InsideProductPage from "@/components/ProductPage";
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
-  searchParams: Promise<{}>;
+  searchParams: Promise<object>;
 }
 
-async function ProductPage(props: ProductPageProps) {
+export default async function ProductPage(props: ProductPageProps) {
   const { id } = await props.params;
   const product = await axios(`https://fakestoreapi.com/products/${id}`);
   const result: ProType = product.data;
@@ -23,5 +23,3 @@ async function ProductPage(props: ProductPageProps) {
     </Container>
   );
 }
-
-export default ProductPage;

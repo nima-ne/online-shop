@@ -1,9 +1,9 @@
-"use client"
+"use client";
 import React, { useState } from "react";
 import Container from "@/components/container";
 import Button from "@/components/button";
 
-function ContactUsPage() {
+export default function ContactUsPage() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,7 +16,6 @@ function ContactUsPage() {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-
     alert("Message sent! " + JSON.stringify(formData));
     setFormData({ name: "", email: "", message: "" });
   };
@@ -26,7 +25,7 @@ function ContactUsPage() {
       <div className="max-w-3xl mx-auto bg-gray-50 p-8 rounded-lg shadow-md mt-10">
         <h1 className="text-2xl font-bold mb-5 text-center">Contact Us</h1>
         <p className="mb-6 text-center text-gray-600">
-          Have any questions? We'd love to hear from you.
+          Have any questions? We&apos;d love to hear from you.
         </p>
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-5">
@@ -68,5 +67,3 @@ function ContactUsPage() {
     </Container>
   );
 }
-
-export default ContactUsPage;

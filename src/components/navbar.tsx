@@ -5,14 +5,14 @@ import React from "react";
 import Input from "./Input";
 import { useShoppingCartContext } from "@/context/ShoppingCartContext";
 
-interface nav {
+interface NavLink {
   id: number;
   tittle: string;
   path: string;
 }
 
-function Navbar() {
-  const navLinks = [
+export default function Navbar() {
+  const navLinks: NavLink[] = [
     { id: 1, tittle: "Home", path: "/" },
     { id: 2, tittle: "About", path: "/about" },
     { id: 3, tittle: "Contact us", path: "/contact-us" },
@@ -25,10 +25,9 @@ function Navbar() {
   return (
     <div className="w-full p-5 sm:p-10 box-border shadow-md mb-10 flex flex-col sm:flex-row justify-between items-start sm:items-center">
       
-      {/* لینک‌ها */}
       <div className="flex flex-col sm:flex-row sm:items-center w-full sm:w-auto mb-3 sm:mb-0">
         <div className="flex flex-col sm:flex-row">
-          {navLinks.map((item: nav) =>
+          {navLinks.map((item) =>
             item.tittle !== "Cart" ? (
               <Link
                 href={item.path}
@@ -57,7 +56,6 @@ function Navbar() {
         </div>
       </div>
 
-      {/* باکس جستجو */}
       <div className="w-full sm:w-[40%] flex justify-start sm:justify-center">
         <Input
           className="bg-gray-300 w-full sm:w-[80%] rounded-lg px-4 py-1 outline-none focus:w-full sm:focus:w-[100%] duration-500 text-gray-600"
@@ -67,5 +65,3 @@ function Navbar() {
     </div>
   );
 }
-
-export default Navbar;

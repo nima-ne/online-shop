@@ -29,7 +29,7 @@ export function ShoppingCartContextProvider({
   const [cartItems, setCartItems] = useState<CartItems[]>([]);
 
   const handleIncrease = (id: number) => {
-    let isNotProductExist = cartItems.find((item) => item.id === id) == null;
+    const isNotProductExist = cartItems.find((item) => item.id === id) == null;
 
     setCartItems((currentItems) => {
       if (isNotProductExist) {
@@ -43,7 +43,7 @@ export function ShoppingCartContextProvider({
   };
 
   const handleDecrease = (id: number) => {
-    let itemExist = cartItems.find((item) => item.id === id);
+    const itemExist = cartItems.find((item) => item.id === id);
 
     setCartItems((currentItems) => {
       if (itemExist && itemExist.qty > 1) {
@@ -60,9 +60,7 @@ export function ShoppingCartContextProvider({
     return cartItems.find((item) => item.id === id)?.qty || 0;
   };
 
-  let totalQty = cartItems.reduce((totalQty, item) => {
-    return totalQty + item.qty;
-  }, 0);
+  const totalQty = cartItems.reduce((total, item) => total + item.qty, 0);
 
   const deleteProduct = (id: number) => {
     setCartItems((currentItems) => {
@@ -71,13 +69,13 @@ export function ShoppingCartContextProvider({
   };
 
   useEffect(() => {
-    let localStorageCart = localStorage.getItem("cart");
+    const localStorageCart = localStorage.getItem("cart");
 
     if (localStorageCart) {
       setCartItems(JSON.parse(localStorageCart));
     }
   }, []);
-  
+
   useEffect(() => {
     localStorage.setItem("cart", JSON.stringify(cartItems));
   }, [cartItems]);

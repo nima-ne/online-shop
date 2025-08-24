@@ -17,9 +17,7 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <ShoppingCartContextProvider>
-            <Layout>
-              {children}
-            </Layout>
+          <Layout>{children}</Layout>
         </ShoppingCartContextProvider>
       </body>
     </html>
