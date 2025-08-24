@@ -1,35 +1,18 @@
-export const dynamic = "force-dynamic";
+export const dynamic = "force-dynamic"; 
+import axios from "axios";
 import { ProType } from "../page";
 import Container from "@/components/container";
 import InsideProductPage from "@/components/ProductPage";
 
 interface ProductPageProps {
-  params: { id: string };
-  searchParams?: object;
+  params: Promise<{ id: string }>;
+  searchParams: Promise<object>;
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = params;
-
-  let result: ProType | null = null;
-
-  try {
-    const res = await fetch(`https://fakestoreapi.com/products/${id}`);
-    if (!res.ok) throw new Error("Failed to fetch product");
-    result = await res.json();
-  } catch (err) {
-    console.error(err);
-  }
-
-  if (!result) {
-    return (
-      <Container>
-        <p className="text-center text-red-500">
-          Product not found or failed to load.
-        </p>
-      </Container>
-    );
-  }
+export default async function ProductPage(props: ProductPageProps) {
+  const { id } = await props.params;
+  const product = await fetch(`https://fakestoreapi.com/products/${id}`);
+  const result: ProType = await product.json();
 
   return (
     <Container>

@@ -14,7 +14,7 @@ export interface ProType {
 
 export default async function Page() {
   const res = await fetch("https://fakestoreapi.com/products", {
-    cache: "no-store", // مهمممم 🚀
+    cache: "no-store", 
   });
 
   if (!res.ok) {
