@@ -1,3 +1,4 @@
+export const dynamic = "force-dynamic"; 
 import axios from "axios";
 import { ProType } from "../page";
 import Container from "@/components/container";
