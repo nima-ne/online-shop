@@ -1,40 +1,45 @@
+"use client";
+
 export const dynamic = "force-dynamic"; 
 import { ProType } from "../page";
 import Container from "@/components/container";
 import InsideProductPage from "@/components/ProductPage";
+import { useEffect, useState } from "react";
 
 interface ProductPageProps {
   params: Promise<{ id: string }>;
   searchParams: Promise<object>;
 }
 
-export default async function ProductPage({ params }: ProductPageProps) {
-  const { id } = await params;
+export default function ProductPage(props: ProductPageProps) {
+  const [product, setProduct] = useState<ProType | null>(null);
+  const [error, setError] = useState("");
 
-  let result: ProType | null = null;
+  useEffect(() => {
+    async function load() {
+      try {
+        const { id } = await props.params;
 
-  try {
-    const product = await fetch(`https://fakestoreapi.com/products/${id}`, {
-      cache: "no-store",
-    });
+        const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+        if (!res.ok) throw new Error("failed");
 
-    if (!product.ok) {
-      throw new Error("Failed to fetch");
+        const data = await res.json();
+        setProduct(data);
+      } catch (e) {
+        setError("Failed to fetch product");
+      }
     }
+    load();
+  }, [props.params]);
 
-    result = await product.json();
-  } catch (err) {
-    console.log("PRODUCT FETCH ERROR:", err);
-    result = null;
-  }
-
-  if (!result) return <p>Failed to load product...</p>;
+  if (error) return <p>{error}</p>;
+  if (!product) return <p>Loading...</p>;
 
   return (
     <Container>
       <div className="shadow-2xl p-5 sm:p-10 box-border rounded-2xl">
         <div className="flex flex-col lg:flex-row gap-5">
-          <InsideProductPage product={result} id={id} />
+          <InsideProductPage product={product} id={product.id.toString()} />
         </div>
       </div>
     </Container>
