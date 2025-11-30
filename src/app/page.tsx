@@ -1,4 +1,6 @@
-export const dynamic = "force-dynamic"; 
+"use client";
+
+import { useEffect, useState } from "react";
 import Container from "@/components/container";
 import ProductCard from "@/components/productCard";
 
@@ -12,21 +14,23 @@ export interface ProType {
   title: string;
 }
 
-export default async function Page() {
-  const res = await fetch("https://fakestoreapi.com/products", {
-    cache: "no-store", 
-  });
+export default function Page() {
+  const [products, setProducts] = useState([]);
+  const [error, setError] = useState("");
 
-  if (!res.ok) {
-    throw new Error("Failed to fetch products");
-  }
+  useEffect(() => {
+    fetch("https://fakestoreapi.com/products")
+      .then((res) => res.json())
+      .then((data) => setProducts(data))
+      .catch(() => setError("Failed to fetch products"));
+  }, []);
 
-  const products: ProType[] = await res.json();
+  if (error) return <p>{error}</p>;
 
   return (
     <Container>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 w-full p-5 box-border">
-        {products.map((product) => (
+        {products.map((product: any) => (
           <ProductCard product={product} key={product.id} />
         ))}
       </div>

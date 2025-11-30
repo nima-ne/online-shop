@@ -29,7 +29,7 @@ export default function ProductCard({ product }: { product: ProType }) {
           {product.description}
         </p>
         <p className="font-semibold">
-          Price: <span>{product.price.toFixed(2)}$</span>
+          Price: <span>{product.price}</span>
         </p>
       </div>
     </Link>

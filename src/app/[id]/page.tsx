@@ -8,10 +8,27 @@ interface ProductPageProps {
   searchParams: Promise<object>;
 }
 
-export default async function ProductPage(props: ProductPageProps) {
-  const { id } = await props.params;
-  const product = await fetch(`https://fakestoreapi.com/products/${id}`);
-  const result: ProType = await product.json();
+export default async function ProductPage({ params }: ProductPageProps) {
+  const { id } = await params;
+
+  let result: ProType | null = null;
+
+  try {
+    const product = await fetch(`https://fakestoreapi.com/products/${id}`, {
+      cache: "no-store",
+    });
+
+    if (!product.ok) {
+      throw new Error("Failed to fetch");
+    }
+
+    result = await product.json();
+  } catch (err) {
+    console.log("PRODUCT FETCH ERROR:", err);
+    result = null;
+  }
+
+  if (!result) return <p>Failed to load product...</p>;
 
   return (
     <Container>
