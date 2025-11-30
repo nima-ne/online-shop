@@ -15,7 +15,7 @@ export interface ProType {
 }
 
 export default function Page() {
-  const [products, setProducts] = useState([]);
+  const [products, setProducts] = useState<ProType[]>([]);
   const [error, setError] = useState("");
 
   useEffect(() => {
@@ -30,7 +30,7 @@ export default function Page() {
   return (
     <Container>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 w-full p-5 box-border">
-        {products.map((product: any) => (
+        {products.map((product) => (
           <ProductCard product={product} key={product.id} />
         ))}
       </div>
